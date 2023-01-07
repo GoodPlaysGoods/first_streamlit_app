@@ -1,6 +1,9 @@
 import streamlit
 import pandas
+import requests
 
+fruityvice_response = requests.get("https://fruityvice.com/api/fruit/watermelon")
+streamlit.text(fruityvice_response)
 streamlit.header('Breakfast Menu')
 streamlit.text('Omega 3 & Blueberry Oatmeal')
 streamlit.text('Kale, Spinach & Rocket Smoothie')
@@ -11,7 +14,8 @@ my_fruit_list = pandas.read_csv("https://uni-lab-files.s3.us-west-2.amazonaws.co
 my_fruit_list = my_fruit_list.set_index('Fruit')
 
 # Let's put a pick list here so they can pick the fruit they want to include 
-streamlit.multiselect("Pick some PLEASE WORK:", list(my_fruit_list.index))
+streamlit.multiselect("Pick some fruit:", list(my_fruit_list.index))
 
 # Display the table on the page.
 streamlit.dataframe(my_fruit_list)
+
